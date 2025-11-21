@@ -5,6 +5,22 @@
 shoma ham age pishnhadi darid mamnon misham benevisid baram
 
 .toye vasl kardane link kardane in file ha be ham yekam moshkel daram ye tozih midid ?
+
+
+
+
+APM:
+salam khaste nabashid , chand nokte khobe deghat konid
+say koni k tabe haro yekam ba ham fasele bedid rahat tar khodne bshe ( dar yaande baraye debug and extend)
+tabe haro baz man negah mikonam moshkeli bashe too hamon file taghir mdiam va balaye file
+minevisam baratoon
+soaleton ro daghigh beporsid darmorde vasl krdn o link krdn k bedonm daghigh manzoreton chie rahat tar komak konm
+dar morede GUI , age mikhay dg foghe foghe khafan beshe 2 ta recommendation : 
+                                                                        1- mitoni az pyqt ya pyslide estefade koni bejaye tkinter (sakht tre ama flexible tr)
+                                                                        2- mitooni tarhe avalie ro bezari bad ba AI , ba koli prompt engineeringe khoob, yechize khafan besazi
+Moafagh bashid
+
+
 '''
 
 
@@ -260,3 +276,4 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
+
