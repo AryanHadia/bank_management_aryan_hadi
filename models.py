@@ -4,6 +4,7 @@ from sqlalchemy import Column , String , Integer , Float , ForeignKey , DateTime
 from datetime import datetime
 from data_base import base
 
+
 class customer(base):
     __tablename__ = "customers"
     id = Column(Integer , primary_key=True , autoincrement=True)
@@ -40,4 +41,5 @@ class Account(base):
     #card_number = Column(String , unique=True)
     #card_cvv = Column(String , nullable=False)
     #card_holder_name = Column(String , nullable=False)
+
     #card_expiration_date = Column(String , nullable=False)
