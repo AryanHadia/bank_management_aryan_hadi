@@ -1,3 +1,7 @@
+''' 
+just connectiong to my sql server
+
+'''
 from sqlalchemy import False_, create_engine
 from sqlalchemy.orm import sessionmaker,declarative_base
 
@@ -8,6 +12,3 @@ session = sessionmaker(bind=engine ,autoflush=False , future=True)
 def get_session():
     return session()
 
-''' 
-just connectiong to my sql server
-'''
