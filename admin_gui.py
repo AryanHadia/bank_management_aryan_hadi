@@ -23,7 +23,6 @@ Moafagh bashid
 
 '''
 
-
 # admin gui (tkinter)
 from tkinter import *
 from tkinter import ttk , messagebox
@@ -276,4 +275,5 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
+
 
