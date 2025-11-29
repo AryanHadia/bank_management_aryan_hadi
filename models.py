@@ -1,4 +1,3 @@
-# class ke vasl behshe be soton database
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column , String , Integer , Float , ForeignKey , DateTime
 from datetime import datetime
@@ -23,6 +22,8 @@ class customer(base):
     def __repr__(self):
         return f"<id={self.id} , email={self.email}>"
 
+
+
 class Account(base):
     __tablename__ = "accounts"
     id = Column(Integer , primary_key=True , autoincrement=True)
@@ -43,3 +44,4 @@ class Account(base):
     #card_holder_name = Column(String , nullable=False)
 
     #card_expiration_date = Column(String , nullable=False)
+
