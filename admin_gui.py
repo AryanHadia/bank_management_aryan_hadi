@@ -7,8 +7,6 @@ shoma ham age pishnhadi darid mamnon misham benevisid baram
 .toye vasl kardane link kardane in file ha be ham yekam moshkel daram ye tozih midid ?
 
 
-
-
 APM:
 salam khaste nabashid , chand nokte khobe deghat konid
 say koni k tabe haro yekam ba ham fasele bedid rahat tar khodne bshe ( dar yaande baraye debug and extend)
@@ -275,5 +273,6 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
+
 
 
