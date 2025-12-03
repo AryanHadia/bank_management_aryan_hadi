@@ -17,6 +17,12 @@
     sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1049 (42000): Unknown database 'bank_management')
     ro mide har kari mikonam dorost nemishe nmidonam chera .
     shaki ham nadaram ke hame etelatesh doroste
+
+APM:
+aval inke khast enabashdi va icon haro dakehel yek fodler besazid bename icons k moratab abshe
+baraye db dar file data_base.py check konid k username o passworde sql eton dorose ya na
+dar enteha shoma baayd aval tabel haye dakehel models.py ro besazid
+bad in models.py ejaze mide python b in model ha vasl bshe
 '''
 
 
@@ -421,4 +427,5 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
+
 
