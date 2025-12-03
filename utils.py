@@ -9,4 +9,3 @@ def check_password(hashed_password, plain_password):
         return True
     else:
         return False
-    
