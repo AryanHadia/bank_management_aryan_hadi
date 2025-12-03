@@ -1,8 +1,8 @@
+# class ke vasl behshe be soton database
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column , String , Integer , Float , ForeignKey , DateTime
 from datetime import datetime
 from data_base import base
-
 
 class customer(base):
     __tablename__ = "customers"
@@ -13,7 +13,7 @@ class customer(base):
     phone_number = Column(String , nullable=False)
     address = Column(String , nullable=False)
 
-    accounts = relationship("account" , back_populates="customer")
+    accounts = relationship("Account" , back_populates="customer")
     
     """ customer data base """
 
@@ -21,8 +21,6 @@ class customer(base):
         return f"[{self.email},{self.name}]"
     def __repr__(self):
         return f"<id={self.id} , email={self.email}>"
-
-
 
 class Account(base):
     __tablename__ = "accounts"
@@ -35,13 +33,26 @@ class Account(base):
 
     # relationships
     customer = relationship("customer" , back_populates="accounts")
-    transactions = relationship("transaction" , back_populates="account")
+    transactions = relationship("Transaction" , back_populates="account")
+
+class admin_data(base):
+    __tablename__= "admin_data"
+    id = Column(Integer , primary_key=True , autoincrement=True)
+    username = Column(String , unique=True)
+    password = Column(String , nullable=False)
+
+class Transaction(base):
+    __tablename__ = "transactions"
+    id = Column(Integer , primary_key=True , autoincrement=True)
+    account_id = Column(Integer , ForeignKey("accounts.id") , nullable=False)
+    amount = Column(Float , nullable=False)
+    created_at = Column(DateTime , default=datetime.utcnow)
+
+    account = relationship("Account" , back_populates="transactions")
 
 
     # next features
     #card_number = Column(String , unique=True)
     #card_cvv = Column(String , nullable=False)
     #card_holder_name = Column(String , nullable=False)
-
     #card_expiration_date = Column(String , nullable=False)
-
