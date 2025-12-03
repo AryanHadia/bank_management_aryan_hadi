@@ -8,6 +8,8 @@
 
 . ye seri bakhsh ha hanoz kamel nashodan baraye mesal bakhshe transaction ha hanoz code nevisi nashode
 
+. icon hayi ke estefade kardam ro ferestadam baraton
+
 !!! dar hale hazer karam gir karede :
     moshkel ine ke be code haye bakhsh Data_base dorost kar nemkone va be data base vasn nemishe
     va error   (line 360, in _open_connection
@@ -419,3 +421,4 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
+
