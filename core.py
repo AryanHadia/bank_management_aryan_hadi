@@ -1,12 +1,11 @@
 from models import customer, Account , admin_data
 from utils import hash_password, check_password
-from data_base import get_session
+from data_base import session   
 import random
-
 
 class admin_panel:
     def __init__(self):
-        self.session=get_session()
+        self.session=session
 
     def create_customer(self, name, email, age , phone_number , address):
         # built a row in database
@@ -45,8 +44,21 @@ class admin_panel:
         self.session.commit()
         print(f"Account {account_id} deleted successfully")
         return account
+
+
+    def delete_customer_accounts (self,customer_id):
+        db_customer = self.session.get(customer, customer_id)
+        if not db_customer:
+            raise ValueError("Customer not found")
+        accounts = db_customer.accounts
+        for account in accounts:
+            self.session.delete(account)
+        self.session.commit()
+        print(f"All accounts of customer {customer_id} deleted successfully")
+        return accounts
+
     
-    
+
     def show_balance(self,account_id):
         account=self.session.get(Account, account_id)
         if not account:
@@ -109,13 +121,14 @@ class admin_panel:
         else:
             return num
         
-    def remove_customer(self, name):
-        customer=self.session.query(customer).filter_by(name=name).first()
-        if not customer:
+    def remove_customer(self, customer_id):
+        customerـ=self.session.get(customer, customer_id)
+        if not customerـ:
             raise ValueError("Customer not found")
-        self.session.delete(customer)
+        self.delete_customer_accounts(customerـ.id)
+        self.session.delete(customerـ)
         self.session.commit()
-        print(f"Customer {name} deleted successfully")
+        print(f"Customer {customer_id} deleted successfully")
         return customer
 
     def create_admin(self, ad_username, ad_password):
@@ -145,3 +158,17 @@ class admin_panel:
             return admin
         print(f"Admin {ad_username_login} logged in successfully")
 
+    def set_admin_image(self, admin_id, image_path):
+        db_admin = self.session.get(admin_data, admin_id)
+        if not db_admin:
+            raise ValueError("Admin not found")
+        with open(image_path, "rb") as f:
+            db_admin.profile_image = f.read()
+        self.session.commit()
+        return db_admin
+
+    def get_admin_image(self, admin_id):
+        db_admin = self.session.get(admin_data, admin_id)
+        if not db_admin:
+            raise ValueError("Admin not found")
+        return db_admin.profile_image
