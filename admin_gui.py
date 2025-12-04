@@ -1,28 +1,12 @@
 '''
-. khaste nabashid in file edit shode akhare ke ye seri mavader taghir kardan
-1- bakhsh management admin ha dare ezafe mishe 
-2- bakhsh management customer ha ezafe shode
-3- baksh login admin ha dare taghir mikone va be database vasl mishe
-4- toye zaher tkinter ye seri taghirat sorat gerefte
-5- ye moudel tarahi kardam baraye generate kardane shomare kart
+. yek seri taghirat dade shode to barname:
+1- moshkel vasl nashodan be data base hal shod va tabel ha sakhte shod
+2- ye seri function ezafe shod ke aks aye admin haro be sorat binary to database zakhire mishe va namayesh dade mishe
+3- bug relationship ha dorost shod
 
-. ye seri bakhsh ha hanoz kamel nashodan baraye mesal bakhshe transaction ha hanoz code nevisi nashode
+. dar kol alan barname dare tamom mishe ye seri az bakhsh haye gui monde ke sari anjam mishe
 
-. icon hayi ke estefade kardam ro ferestadam baraton
-
-!!! dar hale hazer karam gir karede :
-    moshkel ine ke be code haye bakhsh Data_base dorost kar nemkone va be data base vasn nemishe
-    va error   (line 360, in _open_connection
-    raise get_mysql_exception(
-    sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1049 (42000): Unknown database 'bank_management')
-    ro mide har kari mikonam dorost nemishe nmidonam chera .
-    shaki ham nadaram ke hame etelatesh doroste
-
-APM:
-aval inke khast enabashdi va icon haro dakehel yek fodler besazid bename icons k moratab abshe
-baraye db dar file data_base.py check konid k username o passworde sql eton dorose ya na
-dar enteha shoma baayd aval tabel haye dakehel models.py ro besazid
-bad in models.py ejaze mide python b in model ha vasl bshe
+. faghat ostad soval ine ke pishnahad shoma baraye bala bordan amniyat chiye ?
 '''
 
 
@@ -427,5 +411,3 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
-
-
