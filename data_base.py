@@ -1,11 +1,16 @@
-from sqlalchemy import False_, create_engine
-from sqlalchemy.orm import sessionmaker,declarative_base
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-engine = create_engine("mysql+mysqlconnector://root:root1234@localhost",echo=False ,future=True)
+
+engine = create_engine("mysql+mysqlconnector://aryan:pythonint12@localhost:3306", echo=False, future=True)
+
+
+with engine.begin() as conn:
+    conn.execute(text("CREATE DATABASE IF NOT EXISTS bank_db"))
+
+
+engine = create_engine("mysql+mysqlconnector://aryan:pythonint12@localhost:3306/bank_db", echo=False, future=True)
+
 base = declarative_base()
-session = sessionmaker(bind=engine ,autoflush=False , future=True)
-def get_session():
-    return session()
-
-
-
+SessionLocal = sessionmaker(bind=engine, autoflush=False, future=True)
+session = SessionLocal()
