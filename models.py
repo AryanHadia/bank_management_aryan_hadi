@@ -25,7 +25,6 @@ class customer(base):
 
 
 
-
 class Account(base):
     __tablename__ = "accounts"
     id = Column(Integer , primary_key=True , autoincrement=True)
@@ -52,7 +51,6 @@ class admin_data(base):
 
 
 
-
 class Transaction(base):
     __tablename__ = "transactions"
     id = Column(Integer , primary_key=True , autoincrement=True)
@@ -68,3 +66,4 @@ class Transaction(base):
     #card_cvv = Column(String , nullable=False)
     #card_holder_name = Column(String , nullable=False)
     #card_expiration_date = Column(String , nullable=False)
+
