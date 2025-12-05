@@ -7,6 +7,13 @@
 . dar kol alan barname dare tamom mishe ye seri az bakhsh haye gui monde ke sari anjam mishe
 
 . faghat ostad soval ine ke pishnahad shoma baraye bala bordan amniyat chiye ?
+
+
+APM:
+kh awli na negarane amniat naabsh
+baraye amniat bayad rooye har tabe ye AMIN_PANEL shoam password check koni
+expire koni bade ye modat ag trf karesh tamom shod
+two factor password bezari
 '''
 
 
@@ -411,3 +418,4 @@ page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
 page.run()
+
