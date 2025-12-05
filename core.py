@@ -87,7 +87,6 @@ class admin_panel:
         return account
         
     
-    
     def transfer(self,account_id,to_account_id, amount): # transfer from account_id to to_account_id (one account to another account)
         account1=self.session.get(Account, account_id)
         if not account1:
@@ -172,3 +171,4 @@ class admin_panel:
         if not db_admin:
             raise ValueError("Admin not found")
         return db_admin.profile_image
+
