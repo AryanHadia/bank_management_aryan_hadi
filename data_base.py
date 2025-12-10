@@ -12,4 +12,3 @@ engine = create_engine("mysql+mysqlconnector://aryan:pythonint12@localhost:3306/
 base = declarative_base()
 SessionLocal = sessionmaker(bind=engine, autoflush=False, future=True)
 session = SessionLocal()
-
