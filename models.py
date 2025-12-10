@@ -13,7 +13,6 @@ class customer(base):
     phone_number = Column(String , nullable=False)
     address = Column(String , nullable=False)
     
-
     accounts = relationship("Account", back_populates="customer", cascade="all, delete-orphan")
     
     """ customer data base """
@@ -59,11 +58,8 @@ class Transaction(base):
     created_at = Column(DateTime , default=datetime.now)
 
     account = relationship("Account" , back_populates="transactions")
-
-
     # next features
     #card_number = Column(String , unique=True)
     #card_cvv = Column(String , nullable=False)
     #card_holder_name = Column(String , nullable=False)
     #card_expiration_date = Column(String , nullable=False)
-
