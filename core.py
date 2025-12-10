@@ -20,7 +20,7 @@ class admin_panel:
         print(f"Customer Address: {new_customer.address}")
         return new_customer
     
-    
+
     def create_account(self, customer_id, account_number , account_type, account_balance , pin):
         db_customer = self.session.get(customer, customer_id)
         if not db_customer:
@@ -171,4 +171,5 @@ class admin_panel:
         if not db_admin:
             raise ValueError("Admin not found")
         return db_admin.profile_image
+
 
