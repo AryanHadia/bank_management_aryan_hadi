@@ -13,6 +13,7 @@ class customer(base):
     phone_number = Column(String , nullable=False)
     address = Column(String , nullable=False)
     
+
     accounts = relationship("Account", back_populates="customer", cascade="all, delete-orphan")
     
     """ customer data base """
@@ -21,6 +22,7 @@ class customer(base):
         return f"[{self.email},{self.name}]"
     def __repr__(self):
         return f"<id={self.id} , email={self.email}>"
+
 
 
 
@@ -46,7 +48,11 @@ class admin_data(base):
     id = Column(Integer , primary_key=True , autoincrement=True)
     username = Column(String , unique=True)
     password = Column(String , nullable=False)
+    email = Column(String , nullable=False)
+    gender = Column(String , nullable=False)
+    region = Column(String , nullable=False)
     profile_image = Column(LargeBinary , nullable=True)
+
 
 
 
@@ -58,6 +64,8 @@ class Transaction(base):
     created_at = Column(DateTime , default=datetime.now)
 
     account = relationship("Account" , back_populates="transactions")
+
+
     # next features
     #card_number = Column(String , unique=True)
     #card_cvv = Column(String , nullable=False)
