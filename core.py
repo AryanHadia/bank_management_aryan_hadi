@@ -12,8 +12,9 @@ class admin_panel:
     def create_customer(self, name, email, age , phone_number , address):
         # built a row in database
         new_customer = customer(name=name, email=email, age=age, phone_number=phone_number, address=address)
-        self.session.add(new_customer)
+        self.session.add(new_customer) 
         self.session.commit()
+        # printint data
         print(f"Customer {name} created successfully")
         print(f"Customer ID: {new_customer.id}")
         print(f"Customer Email: {new_customer.email}")
@@ -23,9 +24,11 @@ class admin_panel:
         return new_customer
     
     def cutomer_edit(self, customer_id, name, email, age , phone_number , address):
+        # check if customer exists
         db_customer = self.session.get(customer, customer_id)
         if not db_customer:
             raise ValueError("Customer not found")
+        # update data
         db_customer.name = name
         db_customer.email = email
         db_customer.age = age
@@ -40,12 +43,14 @@ class admin_panel:
         print(f"Customer Address: {db_customer.address}")
         return db_customer
 
-    def remove_customer(self, customer_id):
-        customerـ=self.session.get(customer, customer_id)
-        if not customerـ:
+    def remove_customer(self, customer_id): # removing a customer and all his accounts
+        customerـ=self.session.get(customer, customer_id) # finding cutomer 
+        if not customerـ: # if not found :
             raise ValueError("Customer not found")
-        self.delete_customer_accounts(customerـ.id)
-        self.session.delete(customerـ)
+
+        # and if found :
+        self.delete_customer_accounts(customerـ.id) 
+        self.session.delete(customerـ) # delete it
         self.session.commit()
         print(f"Customer {customer_id} deleted successfully")
         return customer
@@ -53,13 +58,15 @@ class admin_panel:
 
     # account managment
    
-    def create_account(self, customer_id, account_number , account_type, account_balance , pin):
-        db_customer = self.session.get(customer, customer_id)
-        if not db_customer:
+    def create_account(self, customer_id, account_number , account_type, account_balance , pin): # creating account in database
+        db_customer = self.session.get(customer, customer_id) # finding customer
+        if not db_customer: # if not found:
             raise ValueError("Customer not found")
-        hashed_pin = hash_password(pin)
+
+        # and if found
+        hashed_pin = hash_password(pin) # hash the pin
         account = Account(customer_id=db_customer.id, account_number=account_number, account_type=account_type, balance=account_balance, pin=hashed_pin)
-        self.session.add(account)
+        self.session.add(account) # add the account to database
         self.session.commit()
         print(f"Account {account_number} created successfully")
         print(f"Account ID: {account.id}")
@@ -68,33 +75,37 @@ class admin_panel:
         return account
     
 
-    def show_accounts(self , treeview):
-        accounts = self.session.query(Account).all()
+    def show_accounts(self , treeview): # show data in treeview
+        accounts = self.session.query(Account).all() # get all accounts
+        # for every account in data base create a coulumn and write the data
         for _ in accounts:
             treeview.insert("", "end", values=(_.id, _.account_number, _.balance, _.account_type))
 
         
     def show_account_once(self, account_number , table__): # inserting a single account in table
-        account = self.session.query(Account).filter(Account.account_number == account_number).first()
-        if not account:
+        account = self.session.query(Account).filter(Account.account_number == account_number).first()  # find the account
+        if not account: # if not found: (error)
             raise ValueError("Account not found")
+        # and if found:
         table__.insert("", "end", values=(account.id, account.account_number, account.balance, account.account_type))
 
     
-    def delete_account(self,account_id):
+    def delete_account(self,account_id): # deleting account from database
         account=self.session.get(Account, account_id)
-        if not account:
+        if not account: # if not found: (error)
             raise ValueError("Account not found")
+        # and if found:
         self.session.delete(account)
         self.session.commit()
         print(f"Account {account_id} deleted successfully")
         return account
 
 
-    def delete_customer_accounts (self,customer_id):
+    def delete_customer_accounts (self,customer_id): # deleting all accounts of a customer
         db_customer = self.session.get(customer, customer_id)
-        if not db_customer:
+        if not db_customer: # if not found: (error)
             raise ValueError("Customer not found")
+        # and if found:
         accounts = db_customer.accounts
         for account in accounts:
             self.session.delete(account)
@@ -104,18 +115,18 @@ class admin_panel:
 
     
 
-    def show_balance(self,account_id):
+    def show_balance(self,account_id): # showing balance of an account
         account=self.session.get(Account, account_id)
-        if not account:
+        if not account: # if not found: (error)
             raise ValueError("Account not found")
-        print(f"Account Balance: {account.balance}")
-        return account
+        return account.balance
     
     
-    def deposit(self,account_id, amount):
+    def deposit(self,account_id, amount): # deposit money in account
         account=self.session.get(Account, account_id)
-        if not account:
+        if not account: # if not found: (error)
             raise ValueError("Account not found")
+        amount = float(amount)
         account.balance += amount
         self.session.commit()
         return account
@@ -123,7 +134,8 @@ class admin_panel:
     
     def withdraw(self,account_id, amount):
         account=self.session.get(Account, account_id)
-        if not account:
+        amount = float(amount)
+        if not account: # if not found: (error)
             raise exception("Account not found")
         if account.balance < amount:
             raise ValueError("Insufficient balance")
@@ -140,6 +152,7 @@ class admin_panel:
         account2=self.session.get(Account, to_account_id)
         if not account2:
             raise ValueError("Account not found")
+        amount = float(amount)
         if account1.balance < amount:
             raise ValueError("Insufficient balance")
         account1.balance -= amount
