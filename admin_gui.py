@@ -1,15 +1,5 @@
-'''
-. salam kahste nabashid
-barame taghriban takmile 
-faghat ina monde:
-1.transation hanosz kamel nist
-2.yeseri chizaye dighe mesl noe account be account ha ezafe konam
-3.ye atm besazam
-
-'''
-
-
 # admin gui (tkinter)
+from cProfile import label
 from tkinter import *
 from tkinter import ttk , messagebox
 from turtle import width
@@ -218,12 +208,33 @@ class admin_gui:
         
 
 
+    def remove_account_confirm(self):
+        account_id = self.remove_account_entry.get().strip()
+        if not account_id:
+            messagebox.showerror("Error", "Please enter an account ID")
+            return
+        try:
+            int(account_id)
+        except ValueError:
+            messagebox.showerror("Error", "Account ID must be a number")
+            return
+        admin_panel().delete_account(account_id)
+        messagebox.showinfo("Success", f"Account {account_id} removed successfully")
+        self.remove_account_window.destroy()
+
+
+
     def remove_account(self):
         self.remove_account_window = Toplevel(self.root)
         self.remove_account_window.title("Remove Account")
         self.remove_account_window.geometry("400x200")
         self.remove_account_window.configure(bg="#1E1E2F")
         self.remove_account_window.resizable(False, False)
+        # account number
+        Label(self.remove_account_window, text="Account Id:", font=("Arial", 14), bg="#1E1E2F", fg="white").place(x=30, y=30)
+        self.remove_account_entry = Entry(self.remove_account_window, font=("Arial", 14), bg="#1E1E2F", fg="white")
+        self.remove_account_entry.place(x=150, y=30)
+        Button(self.remove_account_window, text="Remove Account", font=("Arial", 14), bg="#838b8b", fg="white", command=self.remove_account_confirm).place(x=150, y=100)
 
 
 
@@ -393,6 +404,54 @@ class admin_gui:
 
 
 
+    def transaction_confirm(self): # confirm transaction
+        account_from = self.transaction_from_account.get().strip()
+        account_to = self.transaction_to_account.get().strip()
+        amount = self.amount_entry.get().strip()
+        balance = admin_panel().show_balance(account_from)
+        try:
+            amount = float(amount)
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid amount")
+            return
+        if amount > balance:
+            messagebox.showerror("Error", "Insufficient balance")
+        if not account_from or not account_to or not amount:
+            messagebox.showerror("Error", "Please fill all fields")
+            return
+        transaction = admin_panel().transfer(account_from, account_to, amount)
+        if  transaction:
+            messagebox.showinfo("Success", f"Transaction successful: from {account_from} to {account_to} for amount {amount}")
+            self.tc_page.destroy()
+        else:
+            messagebox.showerror("Error", "Failed to perform transaction. Please try again.")
+
+
+
+    def transaction_page(self):
+        self.tc_page = Toplevel(self.root)
+        self.tc_page.configure(bg="#1E1E2f")
+        self.tc_page.geometry("450x300")
+        self.tc_page.title("Transaction")
+        self.tc_page.resizable(False, False)
+        Label(self.tc_page, text="Transaction", font=("Arial", 20), bg="#1E1E2f", fg="white").place(x=150, y=20)
+        # first account
+        Label(self.tc_page, text="From(id)", font=("Arial", 14), bg="#1E1E2f", fg="white").place(x=30, y=70)
+        self.transaction_from_account = Entry(self.tc_page, font=("Arial", 14), bg="#1E1E2F", fg="white")
+        self.transaction_from_account.place(x=150, y=70)
+        # second account
+        Label(self.tc_page, text="To(id)", font=("Arial", 14), bg="#1E1E2f", fg="white").place(x=30, y=110)
+        self.transaction_to_account = Entry(self.tc_page, font=("Arial", 14), bg="#1E1E2F", fg="white")
+        self.transaction_to_account.place(x=150, y=110)
+        # amount
+        Label(self.tc_page, text="Amount:", font=("Arial", 14), bg="#1E1E2f", fg="white").place(x=30, y=150)
+        self.amount_entry = Entry(self.tc_page, font=("Arial", 14), bg="#1E1E2F", fg="white")
+        self.amount_entry.place(x=150, y=150)
+        # transaction button
+        Button(self.tc_page, text="Transaction", font=("Arial", 14), bg="#838b8b", fg="white", command=self.transaction_confirm).place(x=150, y=190)
+
+
+
     def dashboard(self): # dashboard page
         # page design
         self.wellcome_label.destroy() # closing wellcome page
@@ -412,7 +471,7 @@ class admin_gui:
         self.bank_icon_label.place(x=10 , y=10)
         
         # transaction menu
-        self.transactions_button = Button(self.root, text="Transactions", font=("Arial", 13), bg="#838b8b", fg="white")
+        self.transactions_button = Button(self.root, text="Transactions", font=("Arial", 13), bg="#838b8b", fg="white", command=self.transaction_page)
         self.transactions_button.place(x=840 , y=420)
         self.transactions_button_icon = Label(self.root, image=self.transaction_icon, bg="#1E1E2F")
         self.transactions_button_icon.place(x=810 , y=420)
@@ -424,7 +483,7 @@ class admin_gui:
         self.add_account_button_icon.place(x=810 , y=470)
       
        # account remove/managment
-        self.remove_account_button = Button(self.root, text="Remove Account", font=("Arial", 13), bg="#838b8b", fg="white")
+        self.remove_account_button = Button(self.root, text="Remove Account", font=("Arial", 13), bg="#838b8b", fg="white", command=self.remove_account)
         self.remove_account_button.place(x=840 , y=520)
         self.remove_account_button_icon = Label(self.root, image=self.remove_account_icon, bg="#1E1E2F")
         self.remove_account_button_icon.place(x=810 , y=520)
@@ -719,7 +778,7 @@ class admin_gui:
 
 
 # running just for test
-page = admin_gui()  
+page = admin_gui() 
 page.mouse_confiqure()
 page.icons()
 page.wellcome_page()
