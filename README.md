@@ -1,7 +1,7 @@
 # Bank management app
 A bank manager app for saving customers data to banking works
 programed by: [@AryanHadia]
-Colaborators: [@APMai]
+Colaborators: [@APMaii]
 
 ## What it can do
 - Adding and handeling customers
