@@ -1,23 +1,31 @@
-# bank_management_aryan_hadi
+# Bank management app
+A bank manager app for saving customers data to banking works
+programed by: [@AryanHadia]
+Colaborators: [@APMai]
 
-This Repository is for Bank Management 
-Fanavari Co Project Summer 2025 
-Supervisor  : Ali Pilehvar Meibody
+## What it can do
+- Adding and handeling customers
+- Handeling customer accounts (the customers car create multi bank accounts)
+- Transfering betwin accounts
 
+## Bank management GUI
+The GUI of this app workes with [Tkinter]
 
----
-# Description
+**The parts of main page:**
+-   Accounts data showing Table:
+    showing all the accounts data (buget , username , ...)
+    Adding/Removing/Editing accounts
 
+-   Admin managing page:
+    Adding/Editing/Removing an admin in the Database
 
+-   Customer managing page:
+    Adding/Editing/Removing Customers in the Database
 
----
-# Structure
+## Database
+Data of the users are saved in Mysql and some tables for 
+all types of data
 
-
-
-----
-# Requirements
-
-
-----
-# How To use
+## Security
+- Logging in required admin Username and Password.
+- All the passwords get hashed before saving in Database
